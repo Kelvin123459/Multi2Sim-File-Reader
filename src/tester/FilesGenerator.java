@@ -1,4 +1,4 @@
-package main;
+package tester;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,9 +6,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Tester {
+/**
+ * Creates files with the same specifications as those to be read
+ * @author Kelvin García Muñiz
+ *
+ */
+public class FilesGenerator {
 	public static void main(String[] args) throws IOException {
 		String outputDirectory = "C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2\\test";
+		String inputDirectory = "testingFiles";
 		String line = null;
 		String line2 = null;
 		int count =0;
@@ -16,8 +22,8 @@ public class Tester {
 			for(int j=2; j<=20;j+=2){
 				for(int k=4;k<=128;k*=2){
 					for(int l=4; l<=256; l*=2){
-						BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2\\x86-cpu-report-vecprod-Cores-4-Threads-32-Vector-size-128-Bandwidth-256"));
-						BufferedReader bufferedReader2 = new BufferedReader(new FileReader("C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2\\x86-cpu-report-fibonacci-Cores-2-Threads-4-Vector-size-4-Bandwidth-256"));
+						BufferedReader bufferedReader = new BufferedReader(new FileReader(inputDirectory+ "\\x86-cpu-report-vecprod-Cores-4-Threads-32-Vector-size-128-Bandwidth-256"));
+						BufferedReader bufferedReader2 = new BufferedReader(new FileReader(inputDirectory+ "\\x86-cpu-report-fibonacci-Cores-2-Threads-4-Vector-size-4-Bandwidth-256"));
 						String fileName = "\\x86-cpu-report-vecprod-Cores-"+j+"-Threads-"+k+"-Vector-size-"+l+"-Bandwidth-"+i;
 						String fileName2 = "\\x86-cpu-report-fibonacci-Cores-"+j+"-Threads-"+k+"-Vector-size-"+l+"-Bandwidth-"+i;
 						PrintWriter out = new PrintWriter(new File(outputDirectory, fileName)); 

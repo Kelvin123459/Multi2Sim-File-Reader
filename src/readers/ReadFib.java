@@ -1,4 +1,4 @@
-package main;
+package readers;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,6 +10,13 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.CellType;
 
+import workbook.Workbook;
+
+/**
+ * 
+ * @author Kelvin García Muñiz
+ *
+ */
 public class ReadFib {
 	Workbook workBook;
 	private HSSFRow row;

@@ -1,26 +1,25 @@
-package main;
+package readers;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellType;
 
+import workbook.Workbook;
+
+/**
+ * 
+ * @author Kelvin García Muñiz
+ *
+ */
 public class ReadVectors {
-//	private String outputDirectory;
 	Workbook workBook;
-//	private String outFile = "\\results.xls";
-//	private FileOutputStream fos;
-//	private HSSFWorkbook workBook = new HSSFWorkbook();
 	private HSSFRow row;
 	private HSSFCell cell;
-	CellType cellType;
 	private String[] temp;
 	private String delimiter = " = ";
 	private String line = null;
@@ -32,7 +31,6 @@ public class ReadVectors {
 		HSSFSheet sheet = workBook.setSheet("VectorProd");
 		String inputDirectory = workBook.getInputDirectory();
 		try {
-//			fos = new FileOutputStream(outputDirectory+outFile);
 			int count2=0; //row
 			boolean firstRun = true;
 			for(int i=256; i<=4096;i+=256){
@@ -49,7 +47,7 @@ public class ReadVectors {
 									if(count>5) {
 										if(count3==0&&count2>0) {
 											cell = row.createCell(count3);
-											cell.setCellType(cellType.STRING);
+											cell.setCellType(CellType.STRING);
 											cell.setCellValue(fileName);
 										}
 										else {
@@ -62,14 +60,13 @@ public class ReadVectors {
 												}
 												else if(m%2!=0&&count2>0) {
 													cell = row.createCell(count3);
-//													System.out.println(str);
 													try {
 														double doubleStr = Double.parseDouble(str);
 														cell.setCellValue(doubleStr);
-														cell.setCellType(cellType.NUMERIC);
+														cell.setCellType(CellType.NUMERIC);
 													} catch (NumberFormatException e) {
 														cell.setCellValue(str);
-														cell.setCellType(cellType.STRING);
+														cell.setCellType(CellType.STRING);
 													}
 													
 												}

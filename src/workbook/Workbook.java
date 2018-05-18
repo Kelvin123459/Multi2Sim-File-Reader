@@ -1,4 +1,4 @@
-package main;
+package workbook;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +7,11 @@ import java.io.IOException;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+/**
+ * 
+ * @author Kelvin García Muñiz
+ *
+ */
 public class Workbook {
 	private HSSFWorkbook workBook;
 	private FileOutputStream fos;
