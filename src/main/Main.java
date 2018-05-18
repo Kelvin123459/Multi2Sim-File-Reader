@@ -14,16 +14,16 @@ import workbook.Workbook;
 public class Main {
 
 	public static void main(String args[]) throws IOException {
-		Workbook wb = new Workbook( "resultsVector", 
+		Workbook wb = new Workbook( "resultsVectorCPU", 
 				"C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2\\test", 
 				"C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2");
-		Workbook wb2 = new Workbook( "resultsFib", 
+		Workbook wb2 = new Workbook( "resultsFibCPU", 
 				"C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2\\test", 
 				"C:\\Users\\Kelvin\\Desktop\\CIIC4082-Project2");
 		ReadVectors vector = new ReadVectors(wb);
 		ReadFib fib = new ReadFib(wb2);
-		vector.createFile();
-		fib.createFile();
+		vector.readCPU();
+		fib.readCPU();
 		System.out.println("Sequence Terminated");
 	}
 }

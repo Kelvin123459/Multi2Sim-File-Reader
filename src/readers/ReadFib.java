@@ -28,7 +28,13 @@ public class ReadFib {
 		this.workBook = workBook;
 		
 	}
-	public void createFile() {
+	public void readCPU() {
+		reader("cpu");
+	}
+	public void readMEM() {
+		reader("mem");
+	}
+	private void reader(String reportType) {
 		HSSFSheet sheet = workBook.setSheet("Fibonacci");
 		String inputDirectory = workBook.getInputDirectory();
 		try {
@@ -39,7 +45,7 @@ public class ReadFib {
 					for(int k=4;k<=128;k*=2){
 						for(int l=4; l<=256; l*=2){
 							try {
-								String fileName = "\\x86-cpu-report-fibonacci-Cores-"+j+"-Threads-"+k+"-Vector-size-"+l+"-Bandwidth-"+i;
+								String fileName = "\\x86-cpu-"+reportType+"-fibonacci-Cores-"+j+"-Threads-"+k+"-Vector-size-"+l+"-Bandwidth-"+i;
 								BufferedReader bufferedReader = new BufferedReader(new FileReader(inputDirectory+fileName));
 								int count=1; //file
 								int count3=0; //cells
