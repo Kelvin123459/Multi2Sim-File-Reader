@@ -29,7 +29,7 @@ public class ReadFib {
 	private int[] lineRange;
 	public ReadFib(Workbook workBook) {
 		this.workBook = workBook;
-		
+
 	}
 	public void readCPU() {
 		reader("cpu");
@@ -47,8 +47,8 @@ public class ReadFib {
 			lineRange = lineRangeCPU;
 		}
 		try {
-			int count2=0; //row
-			boolean firstRun = true;
+			int count2=1; //row
+			setLabels(reportType, sheet);
 			for(int i=256; i<=4096;i+=256){
 				for(int j=2; j<=20;j+=2){
 					for(int k=4;k<=128;k*=2){
@@ -60,8 +60,8 @@ public class ReadFib {
 								int count3=0; //cells
 								row = sheet.createRow(count2);
 								while ((line = bufferedReader.readLine()) != null) {
-									if(count>lineRange[0]) {
-										if(count3==0&&count2>0) {
+									if(count>lineRange[0]&&count<lineRange[1]) {
+										if(count3==0) {
 											cell = row.createCell(count3);
 											cell.setCellType(CellType.STRING);
 											cell.setCellValue(fileName);
@@ -70,11 +70,7 @@ public class ReadFib {
 											temp = line.split(delimiter);
 											for(int m =0; m < temp.length ; m++){
 												String str = temp[m];
-												if(m%2==0&&firstRun==true) {
-													cell = row.createCell(count3);
-													cell.setCellValue(str);
-												}
-												else if(m%2!=0&&count2>0) {
+												if(m%2!=0) {
 													cell = row.createCell(count3);
 													try {
 														double doubleStr = Double.parseDouble(str);
@@ -84,18 +80,14 @@ public class ReadFib {
 														cell.setCellValue(str);
 														cell.setCellType(CellType.STRING);
 													}
-													
+
 												}
 											}
 										}
 										count3++;
 									}
-									if(count>lineRange[1]) {
-										break;
-									}
 									count++;
 								}
-								firstRun=false;
 								count2++;
 								bufferedReader.close();
 								System.out.println("File Read: "+fileName);
@@ -114,5 +106,37 @@ public class ReadFib {
 		}
 		System.out.println("\n ---------------------------------------------"
 				+ "\n FIBONACCI TERMINATED \n ---------------------------------------------");
+	}
+	private void setLabels(String reportType, HSSFSheet sheet) {
+		String fileName = "\\x86-"+reportType+"-report-fibonacci-Cores-2-Threads-4-Vector-size-4-Bandwidth-256";
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(workBook.getInputDirectory()+fileName));
+			int count = 0;
+			int count2 = 0;
+			row = sheet.createRow(0);
+			if(count == 0) {
+				cell = row.createCell(count);
+				cell.setCellValue("File Name");
+				count++;
+			}
+			while ((line = bufferedReader.readLine()) != null) {
+				if(count2>lineRange[0]&&count2<lineRange[1]) {
+					temp = line.split(delimiter);
+					for(int m =0; m < temp.length ; m++){
+						String str = temp[m];
+						if(m%2==0) {
+							cell = row.createCell(count);
+							cell.setCellValue(str);
+						}
+					}
+					count++;
+				}
+				count2++;
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
