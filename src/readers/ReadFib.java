@@ -25,7 +25,7 @@ public class ReadFib {
 	private String delimiter = " = ";
 	private String line = null;
 	private int[] lineRangeCPU = {5, 45};
-	private int[] lineRangeMem = {19, 70};
+	private int[] lineRangeMem = {17, 70};
 	private int[] lineRange;
 	public ReadFib(Workbook workBook) {
 		this.workBook = workBook;

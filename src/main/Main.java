@@ -28,8 +28,8 @@ public class Main {
 				"outputFiles");
 		ReadVectors vector = new ReadVectors(wb);
 		ReadFib fib = new ReadFib(wb2);
-//		vector.readCPU();
-//		fib.readCPU();
+		vector.readCPU();
+		fib.readCPU();
 		vector = new ReadVectors(wb3);
 		fib = new ReadFib(wb4);
 		vector.readMEM();
