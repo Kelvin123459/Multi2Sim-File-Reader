@@ -7,7 +7,7 @@ similar IDE, these procedures may not be required.
 From terminal: java -classpath ./bin main/Main
     
        This command will execute the Main.java class and output results according to the data gotten from the input files. If 
-       the execution is successful, the names of the files generated will be displayed on the console.
+       the execution is successful, the names of the files read will be displayed on the console.
        
        The execution of the program will be successful if the following conditions are satisfied:
        
@@ -26,8 +26,7 @@ From IDE: Run Main.java from the main package
 From terminal: java -classpath ./bin tester/FilesGenerator
 
        This command will execute the FilesGeneratorMain.java class and output files according to specified parameters. 
-       If the execution is sucessful, a message should be displayed on the console, describing the amount of files and
-       and the amount of customers (integer values) in each file
+       If the execution is sucessful, the amount of files executed will be displayed. The execution will be successful if:
        
         1. There is a directory under the name specified by the program ("inputFiles" by default).
           
