@@ -53,3 +53,5 @@ The program is able to generate data for testing. Included, there are sample fil
         4) Sizes 4 - 256
 ## NOTE
 This program makes use of the Apache POI JAVA API in order to access and modify .xls file formats. Should any error occur regarding the imported libraries, head to the Apache POI project website (http://poi.apache.org/download.html) to download the required files. 
+
+Before executing the program, make sure you have modified the input directory in the Main.java class and that you have no compiling errors with the project. By default, if the program is being run from an idea or without any arguments in the terminal, the program will proceed to read and write all the input and output files respectively. 
