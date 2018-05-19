@@ -37,7 +37,7 @@ From terminal: java -classpath ./bin tester/FilesGenerator
        
      * For detailed information head to the in-code implementation *
 From IDE: Run filesGeneratorMain.java from the generators package
-## What the program if for:
+## What the program is for:
 This software was merely created to accelerate and automatize the data recollection process from files created by the Multi2Sim CPU & GPU simulator. 
 ### Main
 The program's main purpose is to take specific data from files with a standard format and create .xls files with this information
