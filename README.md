@@ -51,3 +51,5 @@ The program is able to generate data for testing. Included, there are sample fil
         3) Threads: 4 - 128
         
         4) Sizes 4 - 256
+## NOTE
+This program makes use of the Apache POI JAVA API in order to access and modify .xls file formats. Should any error occur regarding the imported libraries, head to the Apache POI project website (http://poi.apache.org/download.html) to download the required files. 
