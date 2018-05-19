@@ -23,6 +23,9 @@ public class ReadVectors {
 	private String[] temp;
 	private String delimiter = " = ";
 	private String line = null;
+	private int[] lineRangeCPU = {5, 45};
+	private int[] lineRangeMem = {17, 70};
+	private int[] lineRange;
 	public ReadVectors(Workbook workBook) {
 		this.workBook = workBook;
 	}
@@ -35,6 +38,12 @@ public class ReadVectors {
 	private void reader(String reportType) {
 		HSSFSheet sheet = workBook.setSheet("VectorProd");
 		String inputDirectory = workBook.getInputDirectory();
+		if(reportType=="mem") {
+			lineRange = lineRangeMem;
+		}
+		else if(reportType == "cpu") {
+			lineRange = lineRangeCPU;
+		}
 		try {
 			int count2=0; //row
 			boolean firstRun = true;
@@ -43,13 +52,13 @@ public class ReadVectors {
 					for(int k=4;k<=128;k*=2){
 						for(int l=4; l<=256; l*=2){
 							try {
-								String fileName = "\\x86-cpu-"+reportType+"-vecprod-Cores-"+j+"-Threads-"+k+"-Vector-size-"+l+"-Bandwidth-"+i;
+								String fileName = "\\x86-"+reportType+"-report-vecprod-Cores-"+j+"-Threads-"+k+"-Vector-size-"+l+"-Bandwidth-"+i;
 								BufferedReader bufferedReader = new BufferedReader(new FileReader(inputDirectory+fileName));
 								int count=1; //file
 								int count3=0; //cells
 								row = sheet.createRow(count2);
 								while ((line = bufferedReader.readLine()) != null) {
-									if(count>5) {
+									if(count>lineRange[0]) {
 										if(count3==0&&count2>0) {
 											cell = row.createCell(count3);
 											cell.setCellType(CellType.STRING);
@@ -79,7 +88,7 @@ public class ReadVectors {
 										}
 										count3++;
 									}
-									if(count>45) {
+									if(count>lineRange[1]) {
 										break;
 									}
 									count++;
