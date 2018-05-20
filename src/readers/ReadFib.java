@@ -22,11 +22,12 @@ public class ReadFib {
 	private HSSFRow row;
 	private HSSFCell cell;
 	private String[] temp;
-	private String delimiter = " = ";
 	private String line = null;
-	private int[] lineRangeCPU = {5, 45};
-	private int[] lineRangeMem = {17, 70};
+	private final String delimiter = " = ";
+	private final int[] lineRangeCPU = {4, 50, 134, 139};
+	private final int[] lineRangeMem = {17, 70};
 	private int[] lineRange;
+	private final String[] fileSpecs = {"File Name", "Bandwidth", "Cores", "Threads", "Size"};
 	public ReadFib(Workbook workBook) {
 		this.workBook = workBook;
 
@@ -59,31 +60,20 @@ public class ReadFib {
 								int count=1; //file
 								int count3=0; //cells
 								row = sheet.createRow(count2);
+								int[] currentSpecs = {i,j,k,l};
+								for(int z=0;z<5;z++){
+									if(count3<5) {
+										setSpecs(currentSpecs,count,count3,fileName);
+										count3++;
+									}
+								}
 								while ((line = bufferedReader.readLine()) != null) {
 									if(count>lineRange[0]&&count<lineRange[1]) {
-										if(count3==0) {
-											cell = row.createCell(count3);
-											cell.setCellType(CellType.STRING);
-											cell.setCellValue(fileName);
-										}
-										else {
-											temp = line.split(delimiter);
-											for(int m =0; m < temp.length ; m++){
-												String str = temp[m];
-												if(m%2!=0) {
-													cell = row.createCell(count3);
-													try {
-														double doubleStr = Double.parseDouble(str);
-														cell.setCellValue(doubleStr);
-														cell.setCellType(CellType.NUMERIC);
-													} catch (NumberFormatException e) {
-														cell.setCellValue(str);
-														cell.setCellType(CellType.STRING);
-													}
-
-												}
-											}
-										}
+										setCells(count3);
+										count3++;
+									}
+									else if(reportType=="cpu"&&count>=lineRange[2]&&count<=lineRange[3]){
+										setCells(count3);
 										count3++;
 									}
 									count++;
@@ -93,7 +83,7 @@ public class ReadFib {
 								System.out.println("File Read: "+fileName);
 							} catch (FileNotFoundException e) {
 								// TODO Auto-generated catch block
-								e.printStackTrace();
+//								e.printStackTrace();
 							}
 						}
 					}
@@ -114,13 +104,24 @@ public class ReadFib {
 			int count = 0;
 			int count2 = 0;
 			row = sheet.createRow(0);
-			if(count == 0) {
+			for(count=0;count<5;count++){
 				cell = row.createCell(count);
-				cell.setCellValue("File Name");
-				count++;
+				cell.setCellValue(fileSpecs[count]);
 			}
 			while ((line = bufferedReader.readLine()) != null) {
 				if(count2>lineRange[0]&&count2<lineRange[1]) {
+					temp = line.split(delimiter);
+					for(int m =0; m < temp.length ; m++){
+						String str = temp[m];
+						System.out.println(str);
+						if(m%2==0) {
+							cell = row.createCell(count);
+							cell.setCellValue(str);
+						}
+					}
+					count++;
+				}
+				else if(reportType=="cpu"&&count>=lineRange[2]&&count<=lineRange[3]){
 					temp = line.split(delimiter);
 					for(int m =0; m < temp.length ; m++){
 						String str = temp[m];
@@ -137,6 +138,48 @@ public class ReadFib {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	public void setSpecs(int[] currentSpecs, int count, int count3, String fileName){
+		switch(count3){
+		case 1: count3=0;{
+			cell = row.createCell(count3);
+			cell.setCellValue(fileName);
+		}
+		case 2: count3=1;{
+			cell = row.createCell(count3);
+			cell.setCellValue(currentSpecs[0]);
+		}
+		case 3: count3=2;{
+			cell = row.createCell(count3);
+			cell.setCellValue(currentSpecs[1]);
+		}
+		case 4: count3=3;{
+			cell = row.createCell(count3);
+			cell.setCellValue(currentSpecs[2]);
+		}
+		case 5: count3=4;{
+			cell = row.createCell(count3);
+			cell.setCellValue(currentSpecs[3]);
+		}
+		}
+	}
+	private void setCells(int count3){
+		temp = line.split(delimiter);
+		for(int m =0; m < temp.length ; m++){
+			String str = temp[m];
+			if(m%2!=0) {
+				cell = row.createCell(count3-1);
+				try {
+					double doubleStr = Double.parseDouble(str);
+					cell.setCellValue(doubleStr);
+					cell.setCellType(CellType.NUMERIC);
+				} catch (NumberFormatException e) {
+					cell.setCellValue(str);
+					cell.setCellType(CellType.STRING);
+				}
+
+			}
 		}
 	}
 }
