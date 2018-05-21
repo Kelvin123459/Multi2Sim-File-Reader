@@ -14,7 +14,7 @@ import workbook.Workbook;
 public class Main {
 
 	public static void main(String args[]) throws IOException {
-		String inputDir = "INSERT INPUT FILE PATH HERE";
+		String inputDir = "INPUT FILE PATH HERE";
 		String outputDir = "outputFiles";
 		Workbook wb = new Workbook("resultsVectorCPU", inputDir, outputDir );
 		Workbook wb2 = new Workbook( "resultsFibCPU", inputDir, outputDir);
