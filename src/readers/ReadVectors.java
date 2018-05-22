@@ -24,7 +24,7 @@ public class ReadVectors {
 	private String line = null;
 	private final String delimiter = " = ";
 	private final int[] lineRangeCPU = {132, 139, 4, 50};
-	private final int[] lineRangeMem = {17, 70};
+	private final int[] lineRangeMem = {24, 46, 136, 155};
 	private int[] lineRange;
 	private final String[] fileSpecs = {"File Name", "Bandwidth", "Cores", "Threads", "Size"};
 	public ReadVectors(Workbook workBook) {
@@ -70,10 +70,10 @@ public class ReadVectors {
 										setCells(count3);
 										count3++;
 									}
-//									else if(reportType=="cpu"&&count>=lineRange[2]&&count<=lineRange[3]){
-//										setCells(count3);
-//										count3++;
-//									}
+									else if(reportType=="mem"&&count>=lineRange[2]&&count<=lineRange[3]){
+										setCells(count3);
+										count3++;
+									}
 									count++;
 								}
 								count2++;
@@ -121,17 +121,17 @@ public class ReadVectors {
 					}
 					count++;
 				}
-//				else if(reportType=="cpu"&&count>=lineRange[2]&&count<=lineRange[3]){
-//					temp = line.split(delimiter);
-//					for(int m =0; m < temp.length ; m++){
-//						String str = temp[m];
-//						if(m%2==0) {
-//							cell = row.createCell(count);
-//							cell.setCellValue(str);
-//						}
-//					}
-//					count++;
-//				}
+				else if(reportType=="mem"&&count>=lineRange[2]&&count<=lineRange[3]){
+					temp = line.split(delimiter);
+					for(int m =0; m < temp.length ; m++){
+						String str = temp[m];
+						if(m%2==0) {
+							cell = row.createCell(count);
+							cell.setCellValue(str);
+						}
+					}
+					count++;
+				}
 				count2++;
 			}
 			bufferedReader.close();

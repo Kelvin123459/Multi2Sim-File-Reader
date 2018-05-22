@@ -14,7 +14,7 @@ import workbook.Workbook;
 public class Main {
 
 	public static void main(String args[]) throws IOException {
-		String inputDir = "INPUT FILE PATH HERE";
+		String inputDir = "C:\\Users\\Kelvi\\Downloads\\ResultsProject2JahnMarrero";
 		String outputDir = "outputFiles";
 		Workbook wb = new Workbook("resultsVectorCPU", inputDir, outputDir );
 		Workbook wb2 = new Workbook( "resultsFibCPU", inputDir, outputDir);
@@ -52,9 +52,9 @@ public class Main {
 		else if(args.length==0) {
 			System.out.println("Reading Files");
 			vector = new ReadVectors(wb);
-			vector.readCPU();
+//			vector.readCPU();
 			fib = new ReadFib(wb2);
-			fib.readCPU();
+//			fib.readCPU();
 			vector = new ReadVectors(wb3);
 			fib = new ReadFib(wb4);
 			vector.readMEM();
